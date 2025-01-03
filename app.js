@@ -24,7 +24,7 @@ const userRoutes = require('./routes/users');
 const spotgroundRoutes = require('./routes/spotgrounds')
 const reviewRoutes = require('./routes/reviews.js');
 
-const dbUrl = process.env.DB_URL
+const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/bulakan-spot';
 mongoose.connect(dbUrl);
 
 // mongoose.connect('mongodb://127.0.0.1:27017/bulakan-spots');
@@ -48,7 +48,7 @@ app.use(mongoSanitize({
 }))
 
 const store = MongoStore.create({
-    mongoUrl: 'mongodb://127.0.0.1:27017/bulakan-spots', //baguhin later
+    mongoUrl: dbUrl, //baguhin later
     touchAfter: 24 * 60 * 60,
     crypto: {
         secret: 'thisshouldbeabettersecret!'
