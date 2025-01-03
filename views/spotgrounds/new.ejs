@@ -1,0 +1,70 @@
+<% layout('./layouts/boilerplate')%>
+
+<div class="row">
+    <h1 class="text-center">ADD Bulakan Spot</h1>
+    <div class="col-md-6 offset-md-3">
+        <form action="/spotgrounds" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+            
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="spotground[title]" required>
+                <div class="valid-feedback">Good</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="location">Location</label>
+                <input class="form-control" type="text" id="location" name="spotground[location]" required>
+                <div class="valid-feedback">Good</div>
+            </div>
+            <!-- <div class="mb-3">
+                <label class="form-label" for="image">Image Url</label>
+                <input class="form-control" type="text" id="image" name="spotground[image]" required>
+                <div class="valid-feedback">Good</div>
+            </div> -->
+            <div class="mb-3">
+                <div class="form-file custom-file">
+                    <label for="image" class="form-label">Upload Images</label>
+                    <input type="file" class="form-control" id="image" name="image" multiple>
+                    <small class="form-text text-muted">Selected files: <span class="form-file-text">Choose image(s)...</span></small>
+                </div>
+            </div>
+            
+
+            <div class="mb-3">
+                <label class="form-label" for="price">Price</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="price-label">₱</span>
+                    <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                        aria-describedby="price-label" name="spotground[price]" required>
+                        <div class="valid-feedback">Good</div>
+
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="start">Business Hours</label>
+                <div class="row align-items-start">
+                <input class="form-control col mx-2" type="time" id="start" name="spotground[time1]" required></input>
+                <input class="form-control col mx-2" type="time" id="start" name="spotground[time2]" required></input>
+                </div>
+                <div class="valid-feedback">Good</div>
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" type="text" id="description" name="spotground[description]" required></textarea>
+                <div class="valid-feedback">Good</div>
+
+            </div>
+            <div class="mb-3 center">
+                <button class="btn btn-success">Add</button>
+            </div>
+        </form>
+        
+    <a href="/spotgrounds">All Bulakan Spots</a>
+
+
+    <script>
+        document.querySelector('#image').addEventListener('change', function (e) {
+        const fileList = Array.from(e.target.files).map(file => file.name).join(', ');
+        document.querySelector('.form-file-text').textContent = fileList || 'Choose image(s)...';
+    });
+    </script>

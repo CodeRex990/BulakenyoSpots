@@ -1,0 +1,70 @@
+<% layout('./layouts/boilerplate') %>
+
+    <div class="row">
+        <h1 class="text-center">Edit Bulakan Spot</h1>
+        <div class="col-md-6 offset-md-3">
+            <form action="/spotgrounds/<%= spotground._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" name="spotground[title]"
+                        value="<%= spotground.title %>" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" id="location" name="spotground[location]"
+                        value="<%= spotground.location %>" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="price">Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text">₱</span>
+                        <input type="text" class="form-control" id="price" name="spotground[price]"
+                            value="<%= spotground.price %>" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="start">Business Hours</label>
+                    <div class="row">
+                        <input class="form-control col mx-2" type="time" id="start" name="spotground[time1]"
+                            value="<%= spotground.time1 %>" required>
+                        <input class="form-control col mx-2" type="time" id="end" name="spotground[time2]"
+                            value="<%= spotground.time2 %>" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" id="description" name="spotground[description]"
+                        required><%= spotground.description %></textarea>
+                </div>
+                <!-- UPLOAD IMAGE  -->
+                <div class="mb-3">
+                    <label for="image" class="form-label">Add More Image(s)</label>
+                    <input type="file" class="form-control" id="image" name="image" multiple>
+                    <small class="form-text text-muted">Selected files: <span id="file-names">None</span></small>
+                </div>
+                <!-- UPLOAD IMAGE^^^^  -->
+                <div class="mb-3">
+                    <% spotground.images.forEach(function(img, i) { %>
+
+                        <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="">
+                        <div class="form-check-inline">
+                            <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                        </div>
+                        <label for="image-<%=i%>">Delete?</label>
+                        <% })%>
+                </div>
+                <div class="mb-3 text-center">
+                    <button class="btn btn-info">Update</button>
+                </div>
+            </form>
+            <a href="/spotgrounds/<%= spotground._id %>">Back to Spot</a>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('#image').addEventListener('change', function (e) {
+            const fileList = Array.from(e.target.files).map(file => file.name).join(', ');
+            document.querySelector('#file-names').textContent = fileList || 'None';
+        });
+    </script>
