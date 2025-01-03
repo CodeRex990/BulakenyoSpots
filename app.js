@@ -24,10 +24,10 @@ const userRoutes = require('./routes/users');
 const spotgroundRoutes = require('./routes/spotgrounds')
 const reviewRoutes = require('./routes/reviews.js');
 
-// const dbUrl = process.env.DB_URL
-// mongoose.connect(dbUrl);
+const dbUrl = process.env.DB_URL
+mongoose.connect(dbUrl);
 
-mongoose.connect('mongodb://127.0.0.1:27017/bulakan-spots');
+// mongoose.connect('mongodb://127.0.0.1:27017/bulakan-spots');
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
