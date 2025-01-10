@@ -1,25 +1,29 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-light">
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-  
+    <!-- Brand and Toggler -->
+    <a class="navbar-brand d-flex align-items-center fs-2 text-black fw-bolder" href="#">
+      <img src="/src/bsl.png" alt="BulakanSpotted" width="40" height="40" class="me-2"> BULAKENYO Spotted
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
-      <div class="navbar-nav nav-left">
-        <a class="navbar-brand fs-2 text-black fw-bolder" href="#">
-          <img src="/src/bsl.png" alt="BulakanSpotted" width="40" height="40"> BULAKENYO Spotted
-        </a>
-        <a class="nav-link fw-bolder fs-3 <%= currentPath === '/' ? 'active' : '' %>" href="/">HOME</a>
-        <a class="nav-link fw-bolder fs-3 <%= currentPath === '/spotgrounds' ? 'active' : '' %>" href="/spotgrounds">SPOTS</a>
-        <!-- <a class="nav-link fw-bolder fs-3 <%= currentPath === '/spotgrounds/new' ? 'active' : '' %>" href="/spotgrounds/new">Add Spots</a> -->
+
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <!-- Left Links -->
+      <div class="navbar-nav">
+        <a class="nav-link fw-bolder fs-5 <%= currentPath === '/' ? 'active' : '' %>" href="/">HOME</a>
+        <a class="nav-link fw-bolder fs-5 <%= currentPath === '/spotgrounds' ? 'active' : '' %>" href="/spotgrounds">SPOTS</a>
       </div>
+      
+      <!-- Right Links -->
       <div class="navbar-nav ms-auto">
-        <% if(!currentUser) {%>
-          <a class="nav-link fw-bolder fs-3 <%= currentPath === '/login' ? 'active' : '' %>" href="/login">LOGIN</a>
-          <a class="nav-link fw-bolder fs-3 <%= currentPath === '/register' ? 'active' : '' %>" href="/register">REGISTER</a>
-        <% } else {%>
-          <a class="nav-link fw-bolder fs-3" href="/logout">Logout</a>
+        <% if (!currentUser) { %>
+          <a class="nav-link fw-bolder fs-5 <%= currentPath === '/login' ? 'active' : '' %>" href="/login">LOGIN</a>
+          <a class="nav-link fw-bolder fs-5 <%= currentPath === '/register' ? 'active' : '' %>" href="/register">REGISTER</a>
+        <% } else { %>
+          <a class="nav-link fw-bolder fs-5" href="/logout">LOGOUT</a>
         <% } %>
       </div>
     </div>
@@ -27,37 +31,36 @@
 </nav>
 
 <style>
-  .nav-left {
-    display: flex;
-    text-align: center;
-    flex-grow: 1;
-    margin-left: 15%;
-  }
-
+  /* General Navbar Styling */
   .nav-link {
     color: black;
-    margin-right: 30px;
-    margin-left: 30px;
+    margin: 5px;
     border-radius: 10px;
-    letter-spacing: 6px;
-
+    letter-spacing: 2px;
+    transition: all 0.3s ease-in-out;
   }
 
   .nav-link:hover {
     background-color: #63806f;
     color: white;
-    transition: 0.3s ease-out;
   }
 
-  .nav-link:active {
-    background-color: #63806f;
-    color: white;
-  }
-
-  /* Styling for the active page */
   .nav-link.active {
     background-color: #63806f;
     color: white;
     font-weight: bold;
+  }
+
+  .navbar-brand img {
+    border-radius: 5px;
+  }
+
+  @media (max-width: 991px) {
+    /* Adjust navbar styling for smaller screens */
+    .nav-link {
+      font-size: 1rem;
+      text-align: center;
+      margin: 10px 0;
+    }
   }
 </style>
