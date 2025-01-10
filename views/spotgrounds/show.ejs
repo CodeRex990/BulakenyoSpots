@@ -1,13 +1,22 @@
 <% layout('./layouts/boilerplate')%>
 <link rel="stylesheet" href="/stylesheets/stars.css">
 
+<style>
+  .display-container{
+    background-color: #526b5c;
+    border-radius: 10px;
+  }
 
-<div id='map'></div>
+</style>
 
+<div class="container-fluid display-container">
+  <div style="height: 20px;"></div> <!-- Spacer -->
+<div id='map' class="map-container "> </div>
+<div style="height: 20px;"></div> <!-- Spacer -->
 <div class="row mx-0">
 
   <!-- Left Column: Card Body -->
-  <div class="col-md-6 d-flex flex-column">
+  <div class="col-md-6 d-flex flex-column justify-content-center">
     <div class="card w-100">
       <!-- IMAGE -->
       <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -42,9 +51,9 @@
         </ul>
         <% if (currentUser && spotground.author.equals(currentUser._id)) { %>
           <div class="card-body">
-            <a class="btn btn-info" href="/spotgrounds/<%= spotground._id %>/edit">Edit</a>
+            <a class="btn btn-success text-white edit-btn" href="/spotgrounds/<%= spotground._id %>/edit">Edit</a>
             <form class="d-inline" action="/spotgrounds/<%= spotground._id %>?_method=DELETE" method="POST">
-              <button class="btn btn-danger">Delete</button>
+              <button class="btn btn-danger text-white del-btn">Delete</button>
             </form>
           </div>
         <% } %>
@@ -58,7 +67,7 @@
     <div class="overflow-auto" style="max-height: 80vh;">
 
       <% if(currentUser){ %>
-      <h2>Leave a Review</h2>
+      <h2 class="fs-1 text-white fw-bolder">Leave a REVIEW</h2>
       <form action="/spotgrounds/<%= spotground._id %>/reviews" method="POST" class="mb-3 validated-form" novalidate>
         <!-- <div class="mb-3">
           <label class="form-label" for="rating">Rating</label>
@@ -79,10 +88,10 @@
           <label for="first-rate5" title="Amazing">5 stars</label>
       </fieldset>
         <div class="mb-3">
-          <label class="form-label" for="body">Review</label>
+          <label class="form-label text-white fs-5" for="body">Review</label>
           <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
         </div>
-        <button class="btn btn-success">Submit</button>
+        <button class="btn btn-success submit-btn">Submit</button>
       </form>
       <% } %>
 <!-- RATINGS -->
@@ -90,7 +99,7 @@
         <div class="card mb-3">
           <div class="card-body">
             <h5 class="card-title"><b><%= review.author.username%></b></h5>
-            <h3>Gawin mong review title</h3>
+            <!-- <h3>Gawin mong review title</h3> -->
             <p class="starability-result" data-rating="<%= review.rating %>">
               Rated: <%= review.rating %> stars
             </p>
@@ -98,7 +107,7 @@
             <p class="card-text">Review: <%= review.body %></p>
             <% if (currentUser && review.author.equals(currentUser._id)) { %>
               <form action="/spotgrounds/<%= spotground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
-                <button class="btn btn-sm btn-danger">Delete</button>
+                <button class="btn btn-sm btn-danger del-btn">Delete</button>
               </form>
             <% } %>
           </div>
@@ -113,7 +122,7 @@
 
 
     <div class="mt-3 text-center">
-      <a href="/spotgrounds" class="btn btn-secondary">Back To All Bulakan Spots</a>
+      <a href="/spotgrounds" class="btn btn-info viewmore-btn mb-2">VIEW others</a>
     </div>
   </div>
 
@@ -130,3 +139,31 @@
 </script>
 
 <script src="/javascripts/showPageMap.js"></script>
+
+</div>
+
+<style>
+  .edit-btn {
+    background-color: #63806f;
+    font-weight: bolder;
+    font-size: 1.2em;
+  }
+  .del-btn {
+    font-weight: bolder;
+    font-size: 1.2em;
+  }
+  .submit-btn {
+    background: #63806f;
+      color: white;
+      font-weight: bolder;
+      font-size: 1.4em;
+      letter-spacing: 3px;
+  }
+
+  .viewmore-btn {
+    background-color: #0cc0df;
+    color: white;
+      font-weight: bolder;
+      font-size: 1.4em;
+  }
+</style>

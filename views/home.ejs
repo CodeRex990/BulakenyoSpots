@@ -1,53 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layouts/boilerplate') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BulakanSpotted</title>
-    <link crossorigin="anonymous" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-    <link rel="stylesheet" href="/stylesheets/home.css">
-</head>
-
-<body class="d-flex text-center text-white bg-dark">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <header class="mb-auto">
-            <div>
-                <h3 class="float-md-left mb-0">BulakanSpotted</h3>
-                <nav class="nav nav-masthead justify-content-center float-md-right">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    <a class="nav-link" href="/spotgrounds">Bulakan Spots</a>
-                    <% if(!currentUser) { %>
-                    <a class="nav-link" href="/login">Login</a>
-                    <a class="nav-link" href="/register">Register</a>
+    <div class="container-fluid p-0">
+        <!-- Navbar -->
+        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="/src/bsl.png" alt="Bulakenyo Spotted Logo" width="40" height="40" class="me-2">
+                <strong>BULAKENYO Spotted</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <% if (!currentUser) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-success text-white ms-2" href="/register">Register</a>
+                        </li>
                     <% } else { %>
-                    <a class="nav-link" href="/logout">Logout</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
                     <% } %>
-                </nav>
+                </ul>
             </div>
-        </header>
-        <main class="px-3">
-            <h1>Mga LAKI sa BULAKAN</h1>
-            <p class="lead"> Welcome to BulakanSpotted! <br> Jump right in and explore our many spotgrounds. <br>
-                Feel free to share some of your own and comment on others!</p>
-            <a href="/spotgrounds" class="btn btn-lg btn-secondary font-weight-bold border-white bg-danger">Explore Bulakan</a>
-        </main>
+        </div>
+    </nav> -->
+        <!-- Hero Section -->
+        <div id="carouselExampleSlidesOnly carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="container-fluid d-block home-banner" src="/src/tempBanner.JPG" alt="" />
+                </div>
+                <div class="carousel-item ">
+                    <img class="container-fluid d-block home-banner" src="/src/tempBanner2.JPG" alt="" />
+                </div>
+                <div class="carousel-item ">
+                    <img class="container-fluid d-block home-banner" src="/src/tempBanner3.JPG" alt="" />
+                </div>
+            </div>
+            <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button> -->
+        </div>
 
-        <footer class="mt-auto text-white-50">
-            <p>&copy; 2024 </p>
-        </footer>
 
-
+        <div class="main-container row align-items-center">
+            <!-- Text Section -->
+            <div class="col-lg-6 col-md-12 text-center text-lg-start mb-4 home-txt">
+                <h1 class="display-4 fw-bold">Let's Explore Bulakan Together</h1>
+                <p class="lead">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                <a href="/spotgrounds" class="btn btn-lg btn-success explore-btn">EXPLORE</a>
+            </div>
+        
+            <!-- Image Gallery Section -->
+            <div class="col-lg-6 col-md-12 img-gallery">
+                <div class="row g-3">
+                    <div class="col-4 col-sm-4 col-md-4">
+                        <div class="card">
+                            <img src="/src/portbanner.jpg" class="card-img-top img-fluid home-gallery" alt="Spot 1" />
+                        </div>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4">
+                        <div class="card">
+                            <img src="/src/portbanner2.jpg" class="card-img-top img-fluid home-gallery" alt="Spot 2" />
+                        </div>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4">
+                        <div class="card">
+                            <img src="/src/portbanner3.JPG" class="card-img-top img-fluid home-gallery" alt="Spot 3" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <style>
+        .home-banner{
+            height: 400px; 
+            object-fit: cover; 
+            border-radius: 5px 20px 5px;
+        }
+        .home-txt {
+            /* width: 50%; */
+        }
+        .home-gallery {
+            height: 30vh;
+            object-fit: cover;
+        }
 
-    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script crossorigin="anonymous" src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
-        crossorigin="anonymous"></script>
-</body>
+        .explore-btn {
+            background-color: #63806f;
+            font-weight: bolder;
+            font-size: 2em;
+            letter-spacing: 3px;
 
-</html>
+        }
+    </style>

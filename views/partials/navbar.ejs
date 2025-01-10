@@ -1,24 +1,63 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">BulakanSPOT</a>
+  
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/spotgrounds">Spots</a>
-        <a class="nav-link" href="/spotgrounds/new">Add Spots</a>
+    <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+      <div class="navbar-nav nav-left">
+        <a class="navbar-brand fs-2 text-black fw-bolder" href="#">
+          <img src="/src/bsl.png" alt="BulakanSpotted" width="40" height="40"> BULAKENYO Spotted
+        </a>
+        <a class="nav-link fw-bolder fs-3 <%= currentPath === '/' ? 'active' : '' %>" href="/">HOME</a>
+        <a class="nav-link fw-bolder fs-3 <%= currentPath === '/spotgrounds' ? 'active' : '' %>" href="/spotgrounds">SPOTS</a>
+        <!-- <a class="nav-link fw-bolder fs-3 <%= currentPath === '/spotgrounds/new' ? 'active' : '' %>" href="/spotgrounds/new">Add Spots</a> -->
       </div>
       <div class="navbar-nav ms-auto">
         <% if(!currentUser) {%>
-          <a class="nav-link" href="/login">Login</a>
-          <a class="nav-link" href="/register">Register</a>
-          <% } else {%>
-          <a class="nav-link" href="/logout">Logout</a>
-          <% } %>
+          <a class="nav-link fw-bolder fs-3 <%= currentPath === '/login' ? 'active' : '' %>" href="/login">LOGIN</a>
+          <a class="nav-link fw-bolder fs-3 <%= currentPath === '/register' ? 'active' : '' %>" href="/register">REGISTER</a>
+        <% } else {%>
+          <a class="nav-link fw-bolder fs-3" href="/logout">Logout</a>
+        <% } %>
       </div>
     </div>
   </div>
 </nav>
+
+<style>
+  .nav-left {
+    display: flex;
+    text-align: center;
+    flex-grow: 1;
+    margin-left: 15%;
+  }
+
+  .nav-link {
+    color: black;
+    margin-right: 30px;
+    margin-left: 30px;
+    border-radius: 10px;
+    letter-spacing: 6px;
+
+  }
+
+  .nav-link:hover {
+    background-color: #63806f;
+    color: white;
+    transition: 0.3s ease-out;
+  }
+
+  .nav-link:active {
+    background-color: #63806f;
+    color: white;
+  }
+
+  /* Styling for the active page */
+  .nav-link.active {
+    background-color: #63806f;
+    color: white;
+    font-weight: bold;
+  }
+</style>

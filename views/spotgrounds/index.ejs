@@ -1,56 +1,93 @@
 <% layout('./layouts/boilerplate')%>
-<div id="cluster-map"></div>
-<h1>MGA LAKI SA BULAKAN</h1>
 <div>
-    <button type="button" class="btn btn-primary btn-lg mb-3 te">
-        <a href="/spotgrounds/new" class="text-light">Add BulakanSpot</a>
-    </button>
-</div>
+    <style>
+        body {
+            background-color: #526b5c;
+            margin: 0;
+            padding: 0;
+        }
 
+        .map-container {
+            width: 100%; /* Makes the map container take the full width */
+            height: 100vh; /* Makes the map container take the full viewport height */
+            position: relative; /* Ensure positioning works correctly */
+        }
 
-<!-- Iterate over categories -->
-<% for (let Spotground of spotgrounds) { %>
-            <div class="card mb-3">
-                <div class="row">
-                    <%if(Spotground.images.length) {%>
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            margin-bottom: 20px;
+        }
+        .add-btn{
+            background-color: #63806f;
+            font-weight: bolder;
+            font-size: 2em;
+            letter-spacing: 3px;
+            text-decoration: none;
+            outline-style: none;
+        }
+        .view-btn{
+            background-color: #63806f;
+            font-weight: bolder;
+            font-size: 1.2em;
+            letter-spacing: 3px;
+            text-decoration: none;
+            outline-style: none;
+        }
+    </style>
+
+    <div id="cluster-map" class="map-container container-fluid"></div>
+    <h1 class="fw-bolder text-white">The Best Destination</h1>
+    <p class="text-white" style="text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore voluptatem alias officiis ad obcaecati praesentium ullam nisi ut maxime. Laudantium quasi corporis cumque at facilis fuga nulla enim a fugiat.</p>
+        <button type="button" class="btn btn-lg mb-3 btn-success add-btn ">
+            <a href="/spotgrounds/new" class="text-white">ADD SPOTS</a>
+        </button>
+
+    <% for (let Spotground of spotgrounds) { %>
+        <div class="card mb-3">
+            <div class="row">
+                <%if(Spotground.images.length) {%>
                     <div class="col-md-4">
-                        <img crossorigin="anonymous" class="img-fluid"  alt="<%= Spotground.title %>" src="<%= Spotground.images[0].url %>">
-                        <% }else {%>
+                        <img crossorigin="anonymous" class="img-fluid" alt="<%= Spotground.title %>" src="<%= Spotground.images[0].url %>">
+                    <% } else {%>
                         <img crossorigin="anonymous" class="img-fluid" alt=""
-                        src="https://res.cloudinary.com/dem3eevon/image/upload/v1735537609/BulakanSpot/cknyd3h4xo3sg2qmgw8a.jpg">
-                        <% } %>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title"><%= Spotground.title %></h5>
-                            <p class="card-text"><%= Spotground.description %></p>
-                            <p class="card-text">
-                                <small class="text-muted"><%= Spotground.location %></small>
-                            </p>
-                            <a class="btn btn-primary" href="/spotgrounds/<%= Spotground._id %>">
-                                View <%= Spotground.title %>
-                            </a>
-                        </div>
+                            src="https://res.cloudinary.com/dem3eevon/image/upload/v1735537609/BulakanSpot/cknyd3h4xo3sg2qmgw8a.jpg">
+                    <% } %>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title fs-1 fw-bolder"><%= Spotground.title %></h5>
+                        <p class="card-text fs-3"><%= Spotground.description %></p>
+                        <p class="card-text fs-4">
+                            <small class="text-muted"><%= Spotground.location %></small>
+                        </p>
+                        <a class="btn btn-success view-btn mt-5" href="/spotgrounds/<%= Spotground._id %>">
+                            View <%= Spotground.title %>
+                        </a>
                     </div>
                 </div>
             </div>
-        <% }; %>
+        </div>
+    <% }; %>
 
-        <script>
-            const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
-            const spotgrounds = {
-                type: "FeatureCollection",
-                features: <%- JSON.stringify(spotgrounds.map(spotground => ({
-                    type: "Feature",
-                    geometry: spotground.geometry,
-                    properties: {
-                        title: spotground.title,
-                        description: spotground.description,
-                        popUpMarkup: `<strong>${spotground.title}</strong><br>${spotground.description}`
-                    }
-                }))) %>
-            };
-        </script>
+    <script>
+        const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
+        const spotgrounds = {
+            type: "FeatureCollection",
+            features: <%- JSON.stringify(spotgrounds.map(spotground => ({
+                type: "Feature",
+                geometry: spotground.geometry,
+                properties: {
+                    title: spotground.title,
+                    description: spotground.description,
+                    popUpMarkup: `<strong>${spotground.title}</strong><br>${spotground.description}`
+                }
+            }))) %>
+        };
+    </script>
 
-<script src="/javascripts/clusterMap.js"></script>
-
+    <script src="/javascripts/clusterMap.js"></script>
+</div>

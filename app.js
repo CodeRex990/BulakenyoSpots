@@ -23,8 +23,9 @@ const mongoSanitize = require('express-mongo-sanitize');
 const userRoutes = require('./routes/users');
 const spotgroundRoutes = require('./routes/spotgrounds')
 const reviewRoutes = require('./routes/reviews.js');
-
 const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/bulakan-spot';
+
+// const dbUrl ='mongodb://127.0.0.1:27017/bulakan-spot';
 mongoose.connect(dbUrl);
 
 // mongoose.connect('mongodb://127.0.0.1:27017/bulakan-spots');
@@ -74,7 +75,10 @@ const sessionConfig = {
 app.use(session(sessionConfig))
 app.use(flash());
 app.use(helmet());
-
+app.use((req, res, next) => {
+    res.locals.currentPath = req.path; // Set the current path for dynamic "active" class
+    next();
+  });
 
 
 const scriptSrcUrls = [
