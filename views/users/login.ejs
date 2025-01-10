@@ -1,61 +1,75 @@
-<% layout('layouts/boilerplate')%>
+<% layout('layouts/boilerplate') %>
 
-  <div class="container d-flex justify-content-center align-items-center mt-0 vh-80">
-    <div class="row">
-      <div class="col-md-6 col-xl-4">
-        <div class="card shadow" style="width: 600px; height: 720px;">
+<div class="container d-flex justify-content-center align-items-center mt-0 min-vh-100">
+  <div class="row justify-content-center w-100">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-4">
+      <div class="card shadow">
 
-          <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="/src/lr.png" alt="" class="card-img-top" />
-              </div>
-              <div class="carousel-item ">
-                <img src="/src/lr.png" alt="" class="card-img-top" />
-              </div>
-              <div class="carousel-item ">
-                <img src="/src/lr.png" alt="" class="card-img-top" />
-              </div>
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="/src/lr.png" alt="Slide 1" class="card-img-top" />
+            </div>
+            <div class="carousel-item">
+              <img src="/src/lr.png" alt="Slide 2" class="card-img-top" />
+            </div>
+            <div class="carousel-item">
+              <img src="/src/lr.png" alt="Slide 3" class="card-img-top" />
             </div>
           </div>
+        </div>
 
-          <div class="card-body">
-            <h5 class="card-title login-title">LOGIN</h5>
-            <form action="/login" method="POST" class="validated-form" novalidate>
-              <div class="mb-3">
-                <label class="form-label" for="username">USERNAME</label>
-                <input class="form-control" type="text" id="username" name="username" autofocus required>
-                <div class="valid-feedback">
-                  Looks good!
-                </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label" for="password">PASSWORD</label>
-                <input class="form-control" type="password" id="password" name="password" required>
-                <div class="valid-feedback">
-                  Looks good!
-                </div>
-              </div>
-              <button class="btn btn-success btn-block login-btn">LOGIN</button>
-            </form>
-          </div>
+        <div class="card-body">
+          <h5 class="card-title text-center login-title">LOGIN</h5>
+          <form action="/login" method="POST" class="validated-form" novalidate>
+            <div class="mb-3">
+              <label class="form-label" for="username">USERNAME</label>
+              <input class="form-control" type="text" id="username" name="username" autofocus required>
+              <div class="valid-feedback">Looks good!</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="password">PASSWORD</label>
+              <input class="form-control" type="password" id="password" name="password" required>
+              <div class="valid-feedback">Looks good!</div>
+            </div>
+            <button class="btn btn-success btn-block login-btn w-100">LOGIN</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
+</div>
 
+<style>
+  .login-title {
+    font-weight: bolder;
+    font-size: 1.8em;
+  }
 
-  <style>
-    .login-title {
-      font-weight: bolder;
-      font-size: ;
+  .login-btn {
+    background: #63806f;
+    color: white;
+    font-weight: bolder;
+    font-size: 1.4em;
+    letter-spacing: 3px;
+  }
+
+  /* Make the carousel images responsive */
+  .carousel-inner img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Improve mobile form input padding */
+  .form-control {
+    padding: 10px;
+  }
+
+  /* Adjust card width for mobile and small screens */
+  @media (max-width: 768px) {
+    .card {
+      width: 100%;
+      height: auto;
     }
-
-    .login-btn {
-      background: #63806f;
-      color: white;
-      font-weight: bolder;
-      font-size: 1.4em;
-      letter-spacing: 3px;
-    }
-  </style>
+  }
+</style>
