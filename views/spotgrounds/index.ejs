@@ -1,93 +1,106 @@
 <% layout('./layouts/boilerplate')%>
-<div>
-    <style>
-        body {
-            background-color: #526b5c;
-            margin: 0;
-            padding: 0;
-        }
 
-        .map-container {
-            width: 100%; /* Makes the map container take the full width */
-            height: 100vh; /* Makes the map container take the full viewport height */
-            position: relative; /* Ensure positioning works correctly */
-        }
+<style>
+    body {
+        background-color: #526b5c;
+        margin: 0;
+        padding: 0;
+    }
 
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-        }
+    .map-container {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+    }
 
-        .btn-primary {
-            margin-bottom: 20px;
-        }
-        .add-btn{
-            background-color: #63806f;
-            font-weight: bolder;
-            font-size: 2em;
-            letter-spacing: 3px;
-            text-decoration: none;
-            outline-style: none;
-        }
-        .view-btn{
-            background-color: #63806f;
-            font-weight: bolder;
-            font-size: 1.2em;
-            letter-spacing: 3px;
-            text-decoration: none;
-            outline-style: none;
-        }
-    </style>
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+    }
 
-    <div id="cluster-map" class="map-container container-fluid"></div>
-    <h1 class="fw-bolder text-white">The Best Destination</h1>
-    <p class="text-white" style="text-align: center;">Bulakan, a historic municipality in Bulacan, is where tradition meets natural beauty, offering rich culture, coastal charm, and timeless heritage.</p>
-        <button type="button" class="btn btn-lg mb-3 btn-success add-btn ">
-            <a href="/spotgrounds/new" class="text-white">ADD SPOTS</a>
-        </button>
+    .add-btn {
+        background-color: #63806f;
+        font-weight: bolder;
+        font-size: 2em;
+        letter-spacing: 3px;
+        text-decoration: none;
+    }
 
-    <% for (let Spotground of spotgrounds) { %>
-        <div class="card mb-3">
-            <div class="row">
-                <%if(Spotground.images.length) {%>
-                    <div class="col-md-4">
-                        <img crossorigin="anonymous" class="img-fluid" alt="<%= Spotground.title %>" src="<%= Spotground.images[0].url %>">
-                    <% } else {%>
-                        <img crossorigin="anonymous" class="img-fluid" alt=""
-                            src="https://res.cloudinary.com/dem3eevon/image/upload/v1735537609/BulakanSpot/cknyd3h4xo3sg2qmgw8a.jpg">
-                    <% } %>
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title fs-1 fw-bolder"><%= Spotground.title %></h5>
-                        <p class="card-text fs-3"><%= Spotground.description %></p>
-                        <p class="card-text fs-4">
-                            <small class="text-muted"><%= Spotground.location %></small>
-                        </p>
-                        <a class="btn btn-success view-btn mt-5" href="/spotgrounds/<%= Spotground._id %>">
-                            View <%= Spotground.title %>
-                        </a>
-                    </div>
-                </div>
+    .view-btn {
+        background-color: #63806f;
+        font-weight: bolder;
+        font-size: 1.2em;
+        letter-spacing: 3px;
+        text-decoration: none;
+    }
+</style>
+
+<!-- ✅ MAP CONTAINER -->
+<div id="cluster-map" class="map-container container-fluid"></div>
+
+<h1 class="fw-bolder text-white">The Best Destination</h1>
+<p class="text-white text-center">
+    Bulakan, a historic municipality in Bulacan, is where tradition meets natural beauty, offering rich culture, coastal charm, and timeless heritage.
+</p>
+
+<button class="btn btn-lg mb-3 btn-success add-btn">
+    <a href="/spotgrounds/new" class="text-white">ADD SPOTS</a>
+</button>
+
+<!-- ✅ CARDS -->
+<% for (let Spotground of spotgrounds) { %>
+<div class="card mb-3">
+    <div class="row">
+        <div class="col-md-4">
+            <% if (Spotground.images.length) { %>
+                <img crossorigin="anonymous" class="img-fluid"
+                    src="<%= Spotground.images[0].url %>"
+                    alt="<%= Spotground.title %>">
+            <% } else { %>
+                <img crossorigin="anonymous" class="img-fluid"
+                    src="https://res.cloudinary.com/dem3eevon/image/upload/v1735537609/BulakanSpot/cknyd3h4xo3sg2qmgw8a.jpg">
+            <% } %>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title fs-1 fw-bolder"><%= Spotground.title %></h5>
+                <p class="card-text fs-3"><%= Spotground.description %></p>
+                <p class="card-text fs-4">
+                    <small class="text-muted"><%= Spotground.location %></small>
+                </p>
+
+                <a class="btn btn-success view-btn mt-5"
+                   href="/spotgrounds/<%= Spotground._id %>">
+                    View <%= Spotground.title %>
+                </a>
             </div>
         </div>
-    <% }; %>
-
-    <script>
-        const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
-        const spotgrounds = {
-            type: "FeatureCollection",
-            features: <%- JSON.stringify(spotgrounds.map(spotground => ({
-                type: "Feature",
-                geometry: spotground.geometry,
-                properties: {
-                    title: spotground.title,
-                    description: spotground.description,
-                    popUpMarkup: `<strong>${spotground.title}</strong><br>${spotground.description}`
-                }
-            }))) %>
-        };
-    </script>
-
-    <script src="/javascripts/clusterMap.js"></script>
+    </div>
 </div>
+<% } %>
+
+<!-- ✅ MAPTILER CSS (REQUIRED) -->
+<link href="https://cdn.maptiler.com/maptiler-sdk-js/v2.0.3/maptiler-sdk.css" rel="stylesheet" />
+
+<!-- ✅ MAP DATA + API KEY -->
+<script>
+    const maptilerApiKey = "<%= process.env.MAPTILER_API_KEY %>";
+
+    const spotgrounds = {
+        type: "FeatureCollection",
+        features: <%- JSON.stringify(spotgrounds.map(spotground => ({
+            type: "Feature",
+            geometry: spotground.geometry,
+            properties: {
+                popUpMarkup: `<strong>${spotground.title}</strong><br>${spotground.description}`
+            }
+        }))) %>
+    };
+</script>
+
+<!-- ✅ MAPTILER SDK (MUST COME BEFORE YOUR SCRIPT) -->
+<script src="https://cdn.maptiler.com/maptiler-sdk-js/v2.0.3/maptiler-sdk.umd.min.js"></script>
+
+<!-- ✅ YOUR MAP SCRIPT -->
+<script src="/javascripts/clusterMap.js"></script>
