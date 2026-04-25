@@ -2,13 +2,12 @@ if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
 
-
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
+const MongoDBStore = require("connect-mongo")(session);
 const flash = require('connect-flash');
 const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override');
@@ -163,6 +162,6 @@ app.use((err, req, res, next) => {
 
 
 
-app.listen(4000, ()=> {
-    console.log('Serving on port 4000')
-})
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Server running");
+});
