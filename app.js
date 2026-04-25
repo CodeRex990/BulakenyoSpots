@@ -80,69 +80,55 @@ app.use(flash());
 app.use(helmet());
 
 // Content Security Policy Configuration
-// const scriptSrcUrls = [
-//     "https://stackpath.bootstrapcdn.com/",
-//     "https://kit.fontawesome.com/",
-//     "https://cdnjs.cloudflare.com/",
-//     "https://cdn.jsdelivr.net",
-//     "https://cdn.maptiler.com/",
-// ];
-// const styleSrcUrls = [
-//     "https://kit-free.fontawesome.com/",
-//     "https://stackpath.bootstrapcdn.com/",
-//     "https://fonts.googleapis.com/",
-//     "https://use.fontawesome.com/",
-//     "https://cdn.jsdelivr.net",
-//     "https://cdn.maptiler.com/",
-// ];
-// const connectSrcUrls = [
-//     "https://api.maptiler.com/",
-//     "https://cdn.maptiler.com/",
-//     "https://cdn.jsdelivr.net",
-// ];
-
 app.use(
-    helmet.contentSecurityPolicy({
-        directives: {
-            defaultSrc: ["'self'"],
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
 
-            connectSrc: [
-                "'self'",
-                "https://api.maptiler.com"
-            ],
+      connectSrc: [
+        "'self'",
+        "https://api.maptiler.com",
+        "https://cdn.maptiler.com",
+        "https://cdn.jsdelivr.net"
+      ],
 
-            scriptSrc: [
-                "'self'",
-                "'unsafe-inline'",
-                "https://cdn.jsdelivr.net",
-                "https://cdn.maptiler.com"
-            ],
+      scriptSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "https://cdn.jsdelivr.net",
+        "https://cdn.maptiler.com",
+        "https://stackpath.bootstrapcdn.com",
+        "https://kit.fontawesome.com",
+        "https://cdnjs.cloudflare.com"
+      ],
 
-            styleSrc: [
-                "'self'",
-                "'unsafe-inline'",
-                "https://cdn.jsdelivr.net",
-                "https://cdn.maptiler.com"
-            ],
+      styleSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "https://cdn.jsdelivr.net",
+        "https://cdn.maptiler.com",
+        "https://stackpath.bootstrapcdn.com",
+        "https://fonts.googleapis.com"
+      ],
 
-            imgSrc: [
-                "'self'",
-                "data:",
-                "blob:",
-                "https://res.cloudinary.com",
-                "https://images.unsplash.com",
-                "https://api.maptiler.com"
-            ],
+      imgSrc: [
+        "'self'",
+        "data:",
+        "blob:",
+        "https://res.cloudinary.com",
+        "https://images.unsplash.com",
+        "https://api.maptiler.com"
+      ],
 
-            fontSrc: [
-                "'self'",
-                "https://fonts.gstatic.com"
-            ],
+      fontSrc: [
+        "'self'",
+        "https://fonts.gstatic.com"
+      ],
 
-            objectSrc: [],
-            workerSrc: ["'self'", "blob:"]
-        }
-    })
+      objectSrc: [],
+      workerSrc: ["'self'", "blob:"]
+    }
+  })
 );
 
 
