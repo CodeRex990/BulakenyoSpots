@@ -23,31 +23,18 @@ const mongoSanitize = require('express-mongo-sanitize');
 const userRoutes = require('./routes/users');
 const spotgroundRoutes = require('./routes/spotgrounds')
 const reviewRoutes = require('./routes/reviews.js');
-// const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/bulakan-spot';
-const dbUrl = process.env.DB_URL;
-
-
-if (!dbUrl) {
-    console.error("❌ DB_URL is not defined. Set it in Railway variables.");
-    process.exit(1);
-}
+const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/bulakan-spot';
 
 // const dbUrl ='mongodb://127.0.0.1:27017/bulakan-spot';
-mongoose.connect(dbUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+mongoose.connect(dbUrl);
 
 // mongoose.connect('mongodb://127.0.0.1:27017/bulakan-spots');
 const db = mongoose.connection;
-
-db.on("error", err => {
-    console.error("❌ MongoDB connection error:", err);
-});
-
+db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
-    console.log("✅ Database Connected");
+    console.log("Database Connected");
 });
+
 const app = express();
 
 app.engine('ejs', ejsMate);
@@ -176,6 +163,6 @@ app.use((err, req, res, next) => {
 
 
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log("Server running");
-});
+app.listen(4000, ()=> {
+    console.log('Serving on port 4000')
+})
