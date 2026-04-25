@@ -22,8 +22,9 @@ const mongoSanitize = require('express-mongo-sanitize');
 const userRoutes = require('./routes/users');
 const spotgroundRoutes = require('./routes/spotgrounds')
 const reviewRoutes = require('./routes/reviews.js');
-const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/bulakan-spot';
-
+// const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/bulakan-spot';
+const dbUrl = process.env.DB_URL;
+console.log("DB_URL:", process.env.DB_URL ? "Loaded" : "Missing");
 // const dbUrl ='mongodb://127.0.0.1:27017/bulakan-spot';
 mongoose.connect(dbUrl);
 
@@ -51,7 +52,8 @@ const store = MongoStore.create({
     mongoUrl: dbUrl, //baguhin later
     touchAfter: 24 * 60 * 60,
     crypto: {
-        secret: 'thisshouldbeabettersecret!'
+        // secret: 'thisshouldbeabettersecret!'
+        secret: process.env.SESSION_SECRET || 'fallbacksecret'   
     }
 });
 
