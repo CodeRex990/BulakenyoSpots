@@ -78,8 +78,6 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 app.use(helmet());
-
-// Content Security Policy Configuration
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -94,21 +92,16 @@ app.use(
 
       scriptSrc: [
         "'self'",
-        "'unsafe-inline'",
+        "'unsafe-inline'", // REQUIRED for your EJS scripts
         "https://cdn.jsdelivr.net",
-        "https://cdn.maptiler.com",
-        "https://stackpath.bootstrapcdn.com",
-        "https://kit.fontawesome.com",
-        "https://cdnjs.cloudflare.com"
+        "https://cdn.maptiler.com"
       ],
 
       styleSrc: [
         "'self'",
         "'unsafe-inline'",
         "https://cdn.jsdelivr.net",
-        "https://cdn.maptiler.com",
-        "https://stackpath.bootstrapcdn.com",
-        "https://fonts.googleapis.com"
+        "https://cdn.maptiler.com"
       ],
 
       imgSrc: [
@@ -130,7 +123,6 @@ app.use(
     }
   })
 );
-
 
 
 app.use(passport.initialize());
